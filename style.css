@@ -1,3 +1,10 @@
 .tweet {
-  margin-bottom: 90px;
+  margin-bottom:15px;
+  border: 2px solid black;
+  padding: 50px  0px  50px 50px;
 }
+
+.user {
+  font-size: 20px;
+}
+
