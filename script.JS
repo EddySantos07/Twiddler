@@ -10,54 +10,79 @@ $(document).ready(function () {
 
 
 
-  function displayUserTweets () {
+  function displayUserTweets() {
 
-    var index = streams.home.length - 1;
+    let name = $(this).text().trim()
 
-    let name =  $(this).text().trim()
-
-    let currentIndex = streams.users[name].length-1;
+    let currentIndex = streams.users[name].length - 1;
 
     console.log(streams.users[name][0].message)
-    console.log(streams.users[name].length, streams.users[name],streams.users[name][currentIndex].message )
+    console.log(streams.users[name].length, streams.users[name], streams.users[name][currentIndex].message)
 
     let middleDiv = $('#mid');
+
     middleDiv.empty();
+
     console.log(streams, '---------------------------')
+    console.log(streams.users[name].length)
 
-    while (index >= 0) {
-      var tweet = streams.home[index];
-      console.log(index , )
 
-      let user = tweet.user;
+    getTweetsInArr(streams.users[name]);
 
-      index -= 1;
+  }
+
+  function getTweetsInArr(arr) {
+
+    for (let i = arr.length -1; i >= 0; i-- ) {
+
+      // console.log(arr[i].user)
+
+      let user = $(`<div class="user"> <b> ${arr[i].user} </b> </div>`);
+
+      let message = $(`<div class='message'> ${arr[i].message} </div> `);
+
+      let whenCreated = $(`<div class = 'created_at'> ${arr[i].created_at} </div> `);
+
+      let tweet = $('<div class="tweet"> </div>');
+
+      $(tweet).append(user,message);
+
+      $(tweet).appendTo('#mid');
+
     }
+
+  }
+
+  function refreshPage () {
+
   }
 
 
   // var index = streams.home.length - 1;
-  while (index >= 0) {
-    var tweet = streams.home[index];
+  function displayAllTweets() {
+    while (index >= 0) {
+      var tweet = streams.home[index];
 
-    let user = $(`<div class="user"> <b> ${tweet.user} </b> </div>`);
+      let user = $(`<div class="user"> <b> ${tweet.user} </b> </div>`);
 
-    let message = $(`<div class='message'> ${tweet.message} </div> `);
+      let message = $(`<div class='message'> ${tweet.message} </div> `);
 
-    let whenCreated = $(`<div class = 'created_at'> ${tweet.created_at} </div> `);
+      let whenCreated = $(`<div class = 'created_at'> ${tweet.created_at} </div> `);
 
-    var $tweet = $('<div class="tweet"> </div>');
+      var $tweet = $('<div class="tweet"> </div>');
 
-    // $tweet.text('@' + tweet.user + ': ' + tweet.message);
+      // $tweet.text('@' + tweet.user + ': ' + tweet.message);
 
-    $($tweet).append(user, message);
-    $($tweet).appendTo('#mid');
+      $($tweet).append(user, message);
+      $($tweet).appendTo('#mid');
 
-    user.on("click",displayUserTweets  )
+      user.on("click", displayUserTweets)
 
-    index -= 1;
+      index -= 1;
+    }
+
   }
 
-
+  displayAllTweets()
 });
 
