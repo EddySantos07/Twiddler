@@ -1,10 +1,33 @@
+body {
+  background-image: url('https://www.visualon.com/wp-content/uploads/2016/11/avada-it-clouds.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.grid {
+  display: grid;
+  grid-template-columns:  25% 50% 25%;
+}
+
+.right {
+  margin-left: px;
+}
+
+
 .tweet {
   margin-bottom:15px;
   border: 2px solid black;
-  padding: 50px  0px  50px 50px;
+  padding: 20px  0px  70px 20px;
+  background: white;
+  background-clip: border-box;
 }
 
 .user {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.message {
   font-size: 20px;
 }
 
