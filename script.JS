@@ -10,10 +10,11 @@ $(document).ready(function () {
 
 
 
-  function displayUserTweets() {
+  function displayUserTweets(user) {
 
-    let name = $(this).text().trim()
-
+    // let name = $(this).text().trim();
+    let name = $(user).text().trim();
+    // console.log($(user).text().trim())
     let currentIndex = streams.users[name].length - 1;
 
     console.log(streams.users[name][0].message)
@@ -29,13 +30,21 @@ $(document).ready(function () {
 
     getTweetsInArr(streams.users[name]);
 
+    $('#buttonRefresh').on('click', function () {
+      displayUserTweets(user);
+    });
+
   }
 
   function getTweetsInArr(arr) {
 
-    for (let i = arr.length -1; i >= 0; i-- ) {
+    $('#mid').append(` <div class='row'> <h1> Tweets for ${arr[0].user} </h1>   </div> `);
 
-      // console.log(arr[i].user)
+    let buttonRefresh = $(`<button id='buttonRefresh'> refresh </button>`);
+
+    $('.row').append(buttonRefresh)
+
+    for (let i = arr.length - 1; i >= 0; i--) {
 
       let user = $(`<div class="user"> <b> ${arr[i].user} </b> </div>`);
 
@@ -45,7 +54,7 @@ $(document).ready(function () {
 
       let tweet = $('<div class="tweet"> </div>');
 
-      $(tweet).append(user,message);
+      $(tweet).append(user, message);
 
       $(tweet).appendTo('#mid');
 
@@ -53,13 +62,13 @@ $(document).ready(function () {
 
   }
 
-  function refreshPage () {
-
-  }
 
 
   // var index = streams.home.length - 1;
   function displayAllTweets() {
+
+    $('#mid').append(`<div id='feed'> Your Feed! </div>  `);
+
     while (index >= 0) {
       var tweet = streams.home[index];
 
@@ -76,7 +85,9 @@ $(document).ready(function () {
       $($tweet).append(user, message);
       $($tweet).appendTo('#mid');
 
-      user.on("click", displayUserTweets)
+      user.on("click", function (){
+        displayUserTweets(user)
+      })
 
       index -= 1;
     }

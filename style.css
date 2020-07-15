@@ -9,10 +9,23 @@ body {
   grid-template-columns:  25% 50% 25%;
 }
 
-.right {
-  margin-left: px;
+#feed {
+  border: 2px solid grey;
+  padding: 10px 0px 15px 10px ;
+  margin-bottom: 15px;
+  background: white;
+  background-clip: border-box;
+  font-size: 30px;
 }
 
+.row {
+  border: 2px solid grey;
+  padding: 1px 10px 1px 10px ;
+  margin-bottom: 15px;
+  background: white;
+  background-clip: border-box;
+
+}
 
 .tweet {
   margin-bottom:15px;
@@ -30,4 +43,5 @@ body {
 .message {
   font-size: 20px;
 }
+
 
