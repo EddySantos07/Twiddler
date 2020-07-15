@@ -30,7 +30,7 @@ $(document).ready(function () {
 
     getTweetsInArr(streams.users[name]);
 
-    $('#buttonRefresh').on('click', function () {
+    $('#userButtonRefresh').on('click', function () {
       displayUserTweets(user);
     });
 
@@ -40,7 +40,7 @@ $(document).ready(function () {
 
     $('#mid').append(` <div class='row'> <h1> Tweets for ${arr[0].user} </h1>   </div> `);
 
-    let buttonRefresh = $(`<button id='buttonRefresh'> refresh </button>`);
+    let buttonRefresh = $(`<button id='userButtonRefresh'> refresh </button>`);
 
     $('.row').append(buttonRefresh)
 
@@ -69,6 +69,10 @@ $(document).ready(function () {
 
     $('#mid').append(`<div id='feed'> Your Feed! </div>  `);
 
+    let buttonRefresh = $(`<button id='homeButtonRefresh'> refresh home! </button>`);
+
+    $('#feed').append(buttonRefresh);
+
     while (index >= 0) {
       var tweet = streams.home[index];
 
@@ -91,6 +95,8 @@ $(document).ready(function () {
 
       index -= 1;
     }
+
+    $('#homeButtonRefresh').on('click', displayAllTweets);
 
   }
 
