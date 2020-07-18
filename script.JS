@@ -64,41 +64,73 @@ $(document).ready(function () {
 
 
 
-  // var index = streams.home.length - 1;
+
   function displayAllTweets() {
 
-    $('#mid').append(`<div id='feed'> Your Feed! </div>  `);
+    // $('#mid').append(`<div id='feed'> Your Feed! </div>  `);
 
-    let buttonRefresh = $(`<button id='homeButtonRefresh'> refresh home! </button>`);
+    // let buttonRefresh = $(`<button class='homeButton'id='homeButtonRefresh'> refresh home! </button>`);
 
-    $('#feed').append(buttonRefresh);
+    // $('#feed').append(buttonRefresh);
 
-    while (index >= 0) {
-      var tweet = streams.home[index];
+    function refreshHome() {
+      // $('#feed').append(buttonRefresh);
 
-      let user = $(`<div class="user"> <b> ${tweet.user} </b> </div>`);
 
-      let message = $(`<div class='message'> ${tweet.message} </div> `);
 
-      let whenCreated = $(`<div class = 'created_at'> ${tweet.created_at} </div> `);
+      while (index >= 0) {
+        console.log('called')
 
-      var $tweet = $('<div class="tweet"> </div>');
+        var tweet = streams.home[index];
 
-      // $tweet.text('@' + tweet.user + ': ' + tweet.message);
+        let user = $(`<div class="user"> <b> ${tweet.user} </b> </div>`);
 
-      $($tweet).append(user, message);
-      $($tweet).appendTo('#mid');
+        let message = $(`<div class='message'> ${tweet.message} </div> `);
 
-      user.on("click", function (){
-        displayUserTweets(user)
-      })
+        let whenCreated = $(`<div class = 'created_at'> ${tweet.created_at} </div> `);
 
-      index -= 1;
+        var $tweet = $('<div class="tweet"> </div>');
+
+        $($tweet).append(user, message);
+
+        $($tweet).appendTo('#mid');
+
+        user.on("click", function () {
+          displayUserTweets(user)
+        })
+
+        index -= 1;
+      }
+
+      $('.homeButton').on('click', function () {
+        index = streams.home.length - 1;
+
+        $('#mid').empty()
+
+        $('#mid').append('<div class="homeFeed" id="feed" > Your Feed! </div> ')
+
+        $('#feed').append(' <button class="homeButton" id="homeButtonRefresh"> see new posts </button>');
+
+        refreshHome();
+      });
+
     }
 
-    $('#homeButtonRefresh').on('click', displayAllTweets);
+    refreshHome();
 
+    // $('.homeButton').on('click', function () {
+    //   index = streams.home.length - 1;
+
+    //   $('#mid').empty()
+
+    //   $('#mid').append('<div class="homeFeed" id="feed" > Your Feed! </div> ')
+
+    //   $('#feed').append(' <button class="homeButton" id="homeButtonRefresh"> refresh home! </button>');
+
+    //   refreshHome();
+    // });
   }
+
 
   displayAllTweets()
 });
