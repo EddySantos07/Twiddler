@@ -38,7 +38,9 @@ $(document).ready(function () {
 
   function getTweetsInArr(arr) {
 
-    $('#mid').append(` <div class='row'> <h1> Tweets for ${arr[0].user} </h1>   </div> `);
+    $('#mid').append(` <div class='row'> <h1> ${arr[0].user} Tweets   </h1>   </div> `);
+
+    // $('.row').append()
 
     let buttonRefresh = $(`<button id='userButtonRefresh'> refresh </button>`);
 
@@ -54,11 +56,28 @@ $(document).ready(function () {
 
       let tweet = $('<div class="tweet"> </div>');
 
-      $(tweet).append(user, message);
+      $(tweet).append(user, message, whenCreated);
 
       $(tweet).appendTo('#mid');
 
     }
+
+
+
+    $('.row').append(' <button class="homeButton" id="homeButtonRefresh"> see new posts </button>');
+
+    $('.homeButton').on('click', function () {
+      index = streams.home.length - 1;
+
+      $('#mid').empty()
+
+
+      $('#mid').append('<div class="homeFeed" id="feed" > Your Feed! </div> ')
+
+      $('#feed').append(' <button class="homeButton" id="homeButtonRefresh"> see new posts </button>');
+
+      displayAllTweets()
+    });
 
   }
 
@@ -79,7 +98,7 @@ $(document).ready(function () {
 
 
       while (index >= 0) {
-        console.log('called')
+        console.log('called',streams.home.length)
 
         var tweet = streams.home[index];
 
@@ -91,7 +110,7 @@ $(document).ready(function () {
 
         var $tweet = $('<div class="tweet"> </div>');
 
-        $($tweet).append(user, message);
+        $($tweet).append(user, message, whenCreated);
 
         $($tweet).appendTo('#mid');
 
@@ -104,7 +123,7 @@ $(document).ready(function () {
 
       $('.homeButton').on('click', function () {
         index = streams.home.length - 1;
-
+        // console.log(streams.home.length)
         $('#mid').empty()
 
         $('#mid').append('<div class="homeFeed" id="feed" > Your Feed! </div> ')
